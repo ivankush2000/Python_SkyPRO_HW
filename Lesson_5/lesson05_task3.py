@@ -1,22 +1,26 @@
 from time import sleep
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 
+
+URL_INPUT = "http://the-internet.herokuapp.com/inputs"
 
 driver = webdriver.Firefox()
 
-driver.get("https://the-internet.herokuapp.com/login")
+driver.get(URL_INPUT)
 
-input1 = "input#username"
+search_input = driver.find_element(By.CSS_SELECTOR, "input")
+search_input.send_keys("12345") 
+print("Введено: 12345")
+sleep(2)
 
-search_input = driver.find_element(By.CSS_SELECTOR, input1)
-search_input.send_keys("tomsmith") 
-sleep(1)
+search_input.clear()
+print("Поле очищено")
+sleep(2)
 
-input2 = "input#password"
-search_input = driver.find_element(By.CSS_SELECTOR, input2)
-search_input.send_keys("SuperSecretPassword!") 
-sleep(1)
+search_input.send_keys("54321")
+print("Введено: 54321")
+sleep(2)
 
-search_input.send_keys(Keys.ENTER)
+driver.quit()
+print("Браузер закрыт")
